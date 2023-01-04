@@ -25,10 +25,10 @@ class Conection{
         $cmd = $this->pdo->prepare("SELECT id FROM usuario WHERE email = :e");
         $cmd->bindValue(":e", $email);
         $cmd->execute();
-
+        // SE O E-MAIL EXISTE  
         if($cmd->rowCount() > 0){
             return false;
-        }else{
+        }else{// SE O E-MAIL NÃO ESTA CADASTRADO AINDA
             // INSERÇÃO DE USUARIO NO BANCO
             $cmd = $this->pdo->prepare("INSERT INTO usuario(nome, tel, email)VALUES(:n, :t, :e)");
 
@@ -51,12 +51,16 @@ class Conection{
         return $res;
     }
 
+    // DELETA UM USUARIO AO CLICAR NO BOTÃO EXCLUIR
     public function deletar($id){
         $cmd = $this->pdo->prepare("DELETE FROM usuario WHERE id = :id");
         $cmd->bindValue(":id", $id);
         $cmd->execute();     
     }
 
+    // SE CLICOU NO BOTÃO EDITAR 
+    // BUSCA TODOS OS DADOS REFERENTES AO ID
+    // E PREENCHE OS VALUES DOS INPUTS PARA EDIÇÃO
     public function buscar_editar($id){
         $res = [];
         $cmd = $this->pdo->prepare("SELECT * FROM usuario WHERE id = :id");
@@ -65,7 +69,8 @@ class Conection{
         $res = $cmd->fetch(PDO::FETCH_ASSOC);
         return $res;
     }
-
+    // DEPOIS DE FEITO AS MUDANÇAS NOS DADOS
+    // INSERE NOVAMENTE O USUARIO NO BANCO DE DADOS
     public function editar($edit, $nome, $telefone, $email){
         $cmd = $this->pdo->prepare("UPDATE usuario SET nome = :n,
         tel = :t, email = :e WHERE id = :id");
@@ -78,25 +83,6 @@ class Conection{
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }// FINAL DA CLASSE CONECTION
-
-
-
-
 
 ?>

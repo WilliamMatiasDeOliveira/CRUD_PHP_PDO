@@ -105,7 +105,7 @@ $con = new Conection('cadastro', 'localhost', 'root', '');
     </div>
 
     <?php
-    // CLICOU NO BOTÃO CADASTRAR OU EDITAR
+    // CLICOU NO BOTÃO
     if (isset($_POST['nome'])) {
         //CLICOU EM EDITAR
         if(isset($_GET['edit']) && !empty($_GET['edit'])){
@@ -186,9 +186,7 @@ $con = new Conection('cadastro', 'localhost', 'root', '');
                 // EXCLUIR UM USUARIO
                 if (isset($_GET['exc'])) {
                     $excluir = $_GET['exc'];
-
                     $con->deletar($excluir);
-                    //header("location: index.php");
                 }
 
                 //EXIBE OS DADOS DO BANCO NA TABELA        
@@ -218,21 +216,6 @@ $con = new Conection('cadastro', 'localhost', 'root', '');
         </div>
 
     </div><!--DIV BOX-->
-
-    <?php
-    
-       
-        
-        
-        
-
-
-
-
-
-    ?>
-
-
 
 </body>
 
